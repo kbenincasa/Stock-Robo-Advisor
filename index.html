@@ -1,0 +1,71 @@
+<!-- Author: Katie Benincasa
+ Date: 7/17/24
+ Purpose: This html code creates the first page when you run the program and offers the user the choice to choose their stock ticker and metric-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Robo Advisor</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<!-- The body above is creating the header of the page along with the container that holds the text and submit button
+ The body below is creating the stock ticker and metric dropdown menu and the choice by the user after the submit button is clicked goes back to the python code via the library flask as seen in that code-->
+<body>
+    <div class="container">
+        <h1>Choose a ticker and a stock metric</h1>
+        <form action="/submit" method="post">
+            <div class="form-group">
+                <label for="stocks">Choose a stock ticker:</label>
+                <select id="stocks" name="stocks">
+                    <option value="AAPL">Apple (AAPL)</option>
+                    <option value="TSLA">Tesla (TSLA)</option>
+                    <option value="MSFT">Microsoft (MSFT)</option>
+                    <option value="GOOGL">Alphabet (GOOGL)</option>
+                    <option value="AMZN">Amazon (AMZN)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="metrics">Choose a stock metric:</label>
+                <select id="metrics" name="metrics">
+                    <option value="annualized_return">Annualized Return</option>
+                    <option value="annualized_volatility">Annualized Volatility</option>
+                    <option value="sharpe_ratio">Sharpe Ratio</option>
+                    <option value="predicted_price">Predicted Stock Price</option>
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

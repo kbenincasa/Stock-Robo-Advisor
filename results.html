@@ -1,0 +1,85 @@
+<!-- Author: Katie Benincasa
+ Date: 7/17/24
+ Purpose: This html code creates the second page of the site and allows the user to see their choice and leave feedback that through the python is available to be seen by the creator for future improvements-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Robo Advisor - Result</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .rating-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<!-- The body above is creating the results of the header which states what is happening and creates button's container and the button itself
+ The body below displays the results and what the user choose in addition to the image of their metric and creates all 10 buttons for the feedback system in addition to the go back button which returns the user to the main screen-->
+<body>
+    <div class="content">
+        <h1>Stock Analysis Result</h1>
+        <p>Stock Ticker: {{ ticker }}</p>
+        <p>Chosen Metric: {{ metric }}</p>
+        <img src="data:image/png;base64,{{ plot_url }}" 
+        <br><br>
+        <a href="/">Go Back</a>
+    </div>
+
+    <h1>Please rate this experience!</h1>
+    <div class="button-container">
+        <button class="rating-button" onclick="rate(1)">1</button>
+        <button class="rating-button" onclick="rate(2)">2</button>
+        <button class="rating-button" onclick="rate(3)">3</button>
+        <button class="rating-button" onclick="rate(4)">4</button>
+        <button class="rating-button" onclick="rate(5)">5</button>
+        <button class="rating-button" onclick="rate(6)">6</button>
+        <button class="rating-button" onclick="rate(7)">7</button>
+        <button class="rating-button" onclick="rate(8)">8</button>
+        <button class="rating-button" onclick="rate(9)">9</button>
+        <button class="rating-button" onclick="rate(10)">10</button>
+    </div>
+<!-- The script below takes the feedback value and saves it to a list then thanks the user for their feedback and if there is an error, returns that as well-->
+    <script>
+        function rate(value) {
+            fetch('/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ rating: value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Thank you for your feedback!');
+                console.log('Feedback List:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+
+</html>
